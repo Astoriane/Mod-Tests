@@ -11,10 +11,9 @@ public class ExcEventHandler {
 	
 	@SubscribeEvent
 	public void onWorldEnter(PlayerLoggedInEvent event) {
+		ExtraneousCraft.chat.sendChatMessageToPlayer(event.player, String.valueOf(Version.getLocalVersionNumber()));
+		ExtraneousCraft.chat.sendChatMessageToPlayer(event.player, String.valueOf(Version.getServerVersionNumber()));
 		ExtraneousCraft.chat.sendChatMessageToPlayer(event.player, String.valueOf(Version.hardcoreOutdatedCheck()));
-		if(Version.isOutdated() == true) {
-			ExtraneousCraft.chat.sendChatMessageToPlayer(event.player, Strings.VERSION_CHECK_OUTDATED + Version.getServerVersion());
-		}
 	}
 	
 	@SubscribeEvent
