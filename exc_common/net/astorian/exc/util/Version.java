@@ -10,6 +10,7 @@ import org.json.JSONTokener;
 public class Version {
 
 	private static String serverVersion;
+	private static boolean checkSuccessFlag;
 
 	public static void checkServerVersion() {
 		try {
@@ -18,9 +19,10 @@ public class Version {
 			JSONObject root = new JSONObject(tokener);
 
 			serverVersion = root.getString("version");
+			checkSuccessFlag = true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			checkSuccessFlag = false;
 		}
 	}
 
@@ -80,6 +82,10 @@ public class Version {
 			return true;
 		else
 			return false;
+	}
+
+	public static boolean isVersionCheckSuccessful() {
+		return checkSuccessFlag;
 	}
 
 }

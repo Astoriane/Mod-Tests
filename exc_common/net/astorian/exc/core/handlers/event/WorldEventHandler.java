@@ -1,14 +1,13 @@
-package net.astorian.exc.core.handlers;
+package net.astorian.exc.core.handlers.event;
 
 import net.astorian.exc.ExtraneousCraft;
 import net.astorian.exc.lib.Reference;
 import net.astorian.exc.lib.Strings;
 import net.astorian.exc.util.Version;
-import net.minecraftforge.event.entity.item.ItemTossEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 
-public class ExcEventHandler {
+public class WorldEventHandler {
 
 	@SubscribeEvent
 	public void onWorldEnter(PlayerLoggedInEvent event) {
@@ -21,11 +20,6 @@ public class ExcEventHandler {
 							Strings.VERSION_CHECK_OUTDATED
 									+ Version.getServerVersion());
 		}
-	}
-
-	@SubscribeEvent
-	public void onItemToss(ItemTossEvent event) {
-
 	}
 
 }

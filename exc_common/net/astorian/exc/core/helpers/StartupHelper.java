@@ -11,6 +11,9 @@ public class StartupHelper {
 	}
 
 	public static void logVersion() {
+		ExcLogger
+				.info(Version.isVersionCheckSuccessful() ? "Version Check Successfully completed"
+						: "Version check failed. Please check internet connection.");
 		ExcLogger.info("Current local version: " + Reference.MOD_VERSION + " "
 				+ Version.getVersionTag(Reference.MOD_VERSION));
 		ExcLogger.info("Current server version: " + Version.getServerVersion()
