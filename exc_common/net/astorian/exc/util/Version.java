@@ -2,7 +2,6 @@ package net.astorian.exc.util;
 
 import java.net.URI;
 
-import net.astorian.exc.ExtraneousCraft;
 import net.astorian.exc.lib.Reference;
 
 import org.json.JSONObject;
@@ -37,33 +36,38 @@ public class Version {
 		return breakdown;
 	}
 	
-	public static double getVersionNumber() {
+	public static double getLocalVersionNumber() {
+		String versionNumber = Reference.MOD_VERSION.substring(0, processVersion(Reference.MOD_VERSION).length - 1);
+		return Double.valueOf(versionNumber);
+	}
+	
+	public static double getServerVersionNumber() {
 		String versionNumber = serverVersion.substring(0, processVersion(serverVersion).length - 1);
 		return Double.valueOf(versionNumber);
 	}
 	
+	public static String getVersionTag() {
+		String index = processVersion(serverVersion)[getLetterIndex()];
+		
+		if(index.equals("a"))
+			return "Alpha";
+		else if(index.equals("b"))
+			return "Beta";
+		else 
+			return "Stable";
+		
+	}
+	
 	public static boolean isVersionAlpha() {
-		if(processVersion(serverVersion)[processVersion(serverVersion).length - 1] == "a") 
+		if(processVersion(serverVersion)[getLetterIndex()].equals("a"))
 			return true;
 		else
 			return false;
 		
 	}
 	
-	public static boolean isVersionBeta() {
-		if(processVersion(serverVersion)[processVersion(serverVersion).length - 1] == "b") 
-			return true;
-		else
-			return false;
-		
-	}
-	
-	public static boolean isVersionStable() {
-		if(processVersion(serverVersion)[processVersion(serverVersion).length - 1] == "s" ) 
-			return true;
-		else
-			return false;
-		
+	private static int getLetterIndex() {
+		return processVersion(serverVersion).length - 1;
 	}
 	
 	public static String getServerVersion() {
@@ -71,10 +75,17 @@ public class Version {
 	}
 	
 	public static boolean isOutdated() {
-		if(Reference.MOD_VERSION == getServerVersion()) {
+		if(getServerVersion().equals(Reference.MOD_VERSION)) {
 			return false;
 		} else
 			return true;
+	}
+	
+	public static boolean hardcoreOutdatedCheck() {
+		if(getLocalVersionNumber() < getServerVersionNumber()) 
+			return true;
+		else
+			return false;
 	}
 
 }

@@ -1,8 +1,11 @@
 package net.astorian.exc;
 
+import org.apache.logging.log4j.Level;
+
 import net.astorian.exc.core.handlers.ChatMessageHandler;
 import net.astorian.exc.core.handlers.ExcEventHandler;
 import net.astorian.exc.lib.Reference;
+import net.astorian.exc.util.ExcLogger;
 import net.astorian.exc.util.Version;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -37,7 +40,10 @@ public class ExtraneousCraft {
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-
+		ExcLogger.log(Level.WARN, "Current local Exc Version: " + Reference.MOD_VERSION);
+		ExcLogger.log(Level.WARN, "Current server Exc Version: " + Version.getServerVersion());
+		ExcLogger.log(Level.WARN, "Is alpha version: " + Version.isVersionAlpha());
+		ExcLogger.log(Level.WARN, "Is Local version outdated: " + Version.isOutdated());
 	}
 	
 	
